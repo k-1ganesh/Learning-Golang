@@ -2,13 +2,14 @@
 // Defer statments are executed at the end of function no matter even error occurs.
 // defer statments uses defer stack for this which follows lifo order.
 // defer can be used for closing resources.
-package main  
+package main
+
 import (
 	"fmt"
 )
 
 func main() {
-    fmt.Println("File Opening") 
+	fmt.Println("File Opening")
 	defer fmt.Println("File Closing")
 	fmt.Println("1")
 	fmt.Println("2")
