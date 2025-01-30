@@ -3,9 +3,9 @@ package main
 import (
 	// "fmt"
 	"errors"
+	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
-	"github.com/gin-gonic/gin"
 )
 
 type Todo struct {
@@ -28,9 +28,9 @@ func getTodos(context *gin.Context) {
 
 }
 func getTodosById(id string) (*Todo, error) {
-	for _, value := range Todos {
-		if id == value.Id {
-			return &value, nil
+	for i := range Todos {
+		if Todos[i].Id == id {
+			return &Todos[i], nil
 		}
 	}
 	return nil, errors.New("value is not in database")
@@ -54,14 +54,6 @@ func toggleTodo(context *gin.Context) {
 		return
 	}
 	todo.Completed = !todo.Completed
-	
-
-	// for i, t := range Todos {
-	// 	if t.Id == todo.Id {
-	// 		Todos[i] = *todo
-	// 		break
-	// 	}
-	// }
 
 	context.IndentedJSON(http.StatusOK, todo) // This returns the result to client
 }
